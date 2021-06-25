@@ -16,7 +16,7 @@ import lombok.EqualsAndHashCode;
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
-public class Test implements Serializable {
+public class Item implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -25,7 +25,11 @@ public class Test implements Serializable {
 
     private String name;
 
-    private String description;
+    private Integer parentId;
+
+    private String detail;
+
+    private String type;
 
 
 }

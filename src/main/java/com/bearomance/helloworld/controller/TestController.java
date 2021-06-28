@@ -34,7 +34,7 @@ public class TestController {
     @GetMapping("/t2")
     public String t2() {
         List<Test> tests = testMapper.selectList(null);
-        Console.log(tests);
+        Console.log(tests);//test
 
         List<TestVO> testVOS = testMapper.testVO();
         Console.log(testVOS);

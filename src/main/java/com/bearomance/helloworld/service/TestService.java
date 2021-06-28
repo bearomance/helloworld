@@ -13,4 +13,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface TestService extends IService<Test> {
 
+    Test findByIdRedis(Integer id);
+    Test updateRedis(Test test);
+    void deleteByIdRedis(Integer id);
 }

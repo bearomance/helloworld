@@ -42,4 +42,14 @@ public class TestController {
         Page<Test> page1 = testService.page(page);
         return page1;
     }
+
+    @GetMapping("/t4")
+    public Test t4(Integer id) {
+        return testService.findByIdRedis(id);
+    }
+
+    @GetMapping("/t5")
+    public void t5(Integer id) {
+        testService.deleteByIdRedis(id);
+    }
 }

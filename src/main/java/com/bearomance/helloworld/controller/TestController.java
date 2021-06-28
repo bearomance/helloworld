@@ -6,6 +6,7 @@ import com.bearomance.helloworld.model.entity.Test;
 import com.bearomance.helloworld.model.mapper.TestMapper;
 import com.bearomance.helloworld.model.vo.TestVO;
 import com.bearomance.helloworld.service.TestService;
+import com.bearomance.helloworld.util.RedisUtil;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -21,8 +22,12 @@ public class TestController {
     @Resource
     private TestService testService;
 
+    @Resource
+    private RedisUtil redisUtil;
+
     @GetMapping("/t1")
     public String t1() {
+        redisUtil.test();
         return "t1 success";
     }
 

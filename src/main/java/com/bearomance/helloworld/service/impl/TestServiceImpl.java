@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
 
 /**
  * <p>
- *  服务实现类
+ * 服务实现类
  * </p>
  *
  * @author xmj
@@ -25,22 +25,24 @@ public class TestServiceImpl extends ServiceImpl<TestMapper, Test> implements Te
 
     /**
      * 将结果缓存，当参数相同时，不会执行方法，从缓存中取
+     *
      * @param id
      * @return
      */
     @Override
-    @Cacheable(key = "#id")
+    @Cacheable(key = "#id", unless = "#result==null")
     public Test findByIdRedis(Integer id) {
         return this.getById(id);
     }
 
     /**
      * 将结果缓存，并且该方法不管缓存是否存在，每次都会执行
+     *
      * @param test
      * @return
      */
     @Override
-    @CachePut(key="#test.id")
+    @CachePut(key = "#test.id")
     public Test updateRedis(Test test) {
         this.updateById(test);
         return test;
@@ -48,6 +50,7 @@ public class TestServiceImpl extends ServiceImpl<TestMapper, Test> implements Te
 
     /**
      * 移除缓存，根据指定key
+     *
      * @param id
      */
     @Override

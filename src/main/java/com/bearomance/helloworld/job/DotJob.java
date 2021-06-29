@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class DotJob {
 
-    @Scheduled(fixedRate = 60000)
+    @Scheduled(fixedRate = 600000)
     public void dot() {
         log.info("...");
     }

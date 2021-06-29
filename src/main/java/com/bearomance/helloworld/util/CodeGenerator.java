@@ -1,12 +1,10 @@
 package com.bearomance.helloworld.util;
 
+import cn.hutool.setting.dialect.Props;
 import com.baomidou.mybatisplus.generator.AutoGenerator;
 import com.baomidou.mybatisplus.generator.config.*;
 import com.baomidou.mybatisplus.generator.config.rules.NamingStrategy;
 import com.baomidou.mybatisplus.generator.engine.FreemarkerTemplateEngine;
-
-import java.io.InputStream;
-import java.util.Properties;
 
 public class CodeGenerator {
 
@@ -23,12 +21,12 @@ public class CodeGenerator {
         mpg.setGlobalConfig(gc);
 
         // 数据源配置
-        Properties properties = getProperties();
         DataSourceConfig dsc = new DataSourceConfig();
-        dsc.setUrl(properties.getProperty("spring.datasource.url"));
+        Props props = new Props("application.properties");
+        dsc.setUrl(props.getStr("spring.datasource.url"));
         dsc.setDriverName("com.mysql.jdbc.Driver");
-        dsc.setUsername(properties.getProperty("spring.datasource.username"));
-        dsc.setPassword(properties.getProperty("spring.datasource.password"));
+        dsc.setUsername(props.getStr("spring.datasource.username"));
+        dsc.setPassword(props.getStr("spring.datasource.password"));
         mpg.setDataSource(dsc);
 
         // 包配置
@@ -53,18 +51,5 @@ public class CodeGenerator {
         mpg.setStrategy(strategy);
         mpg.setTemplateEngine(new FreemarkerTemplateEngine());
         mpg.execute();
-    }
-
-    private static Properties getProperties() {
-
-        Properties properties = new Properties();
-        try {
-            InputStream in = CodeGenerator.class.getResourceAsStream("/application.properties");
-            properties.load(in);
-            in.close();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return properties;
     }
 }

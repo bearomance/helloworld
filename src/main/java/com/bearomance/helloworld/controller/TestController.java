@@ -6,12 +6,12 @@ import com.bearomance.helloworld.model.entity.Test;
 import com.bearomance.helloworld.model.mapper.TestMapper;
 import com.bearomance.helloworld.model.vo.TestVO;
 import com.bearomance.helloworld.service.TestService;
-import com.bearomance.helloworld.util.RedisUtil;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
 
 @RestController
 public class TestController {
@@ -22,13 +22,12 @@ public class TestController {
     @Resource
     private TestService testService;
 
-    @Resource
-    private RedisUtil redisUtil;
+    private AtomicInteger count = new AtomicInteger(0);
 
     @GetMapping("/t1")
     public String t1() {
-        redisUtil.test();
-        return "t1 success";
+        int i = count.getAndIncrement();
+        return "t1 success: " + i;
     }
 
     @GetMapping("/t2")

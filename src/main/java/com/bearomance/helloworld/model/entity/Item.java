@@ -31,5 +31,5 @@ public class Item implements Serializable {
 
     private String type;
 
-
+    private Integer weight;
 }
